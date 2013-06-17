@@ -1,15 +1,23 @@
 ﻿@model HomeworkBingo.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+}
 
-@using (Html.BeginForm("JsonRegister", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { Id = "registerForm" }))
-{
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Create a new account.</h2>
+</hgroup>
+
+@using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
 
     <fieldset>
         <legend>Registration Form</legend>
         <ol>
             <li>
                 @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName, new { id = "registerName" })
+                @Html.TextBoxFor(m => m.UserName)
             </li>
             <li>
                 @Html.LabelFor(m => m.Password)
@@ -19,10 +27,11 @@
                 @Html.LabelFor(m => m.ConfirmPassword)
                 @Html.PasswordFor(m => m.ConfirmPassword)
             </li>
-            <li>
-                <input type="submit" value="Sign up" />
-            </li>
         </ol>
-        @Html.ValidationSummary()
+        <input type="submit" value="Register" />
     </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
