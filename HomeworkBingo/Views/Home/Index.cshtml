@@ -1,45 +1,93 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    Layout = null;
 }
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
-                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
-            </p>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HW</title>
+    <style>
+        .hwcell {
+            text-align:center;
+            font-size:large;
+            display: inline-block;
+            vertical-align: middle;
+            position:absolute; top:50%; 
+            height:10em; 
+            margin-top:-5em;
+            padding:15px;
+            width: 270px;
+        }
+        .hwoutercell {
+            height:300px;
+            width:295px;
+            border: solid 1px;
+            float: left;
+            position: relative;
+        }
+
+        .hwcontainer {
+            width: 900px;
+            height: 900px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+
+        <div class="hwcontainer">
+
+        @{
+            
+            string def = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            Random rnd = new Random();
+            
+            var rand = new System.Random();
+            string[] hw = new string[14];
+            hw[0] = "Math: Add and subtract on the computer";
+            hw[1] = "Write what you had for breakfast and draw it.";
+            hw[2] = "Make something cool out of playdough or clay";
+            hw[3] = "Collections: choose something, count it, describe it, draw it.";
+            hw[4] = "Meal: Plan a meal.  Write the ingredients. Can you help your parents make it.";
+            hw[5] = "Math: Count a pile of nickles. Count by 5, how many, etc.";
+            hw[6] = "Measure FIVE things.  Which is the longest, shortest, tallest?";
+            hw[7] = "Find a pile of things. Guess how many?  Count them.";
+            hw[8] = "Look out the window, what do you see?  Draw it.";
+            hw[9] = "Start a log of something: Weather, Clothing, Amount of Mail, etc.  ";
+            hw[10] = "Take a walk outside, look for things to examine.  Choose one to draw a picture of.";
+            hw[11] = "Practice the letter " + def.Substring(rnd.Next(def.Length), 1) + ".  Choose your best one and circle it.";
+            hw[12] = "Play rhyming games.  Say two words that rhyme, take turns starting and rhyming.";
+            hw[13] = "Play the 'What Word?' game.  Say a word, one sound at a time. Then have your chile say the entire word.";
+            
+            
+            /// Swap and shuffle the array
+            Random _random = new Random();
+	        for (int i = hw.Length; i > 1; i--)
+	        {
+	            // Pick random element to swap.
+	            int j = _random.Next(i); // 0 <= j <= i-1
+	            // Swap.
+	            var tmp = hw[j];
+	            hw[j] = hw[i - 1];
+	            hw[i - 1] = tmp;
+        	}
+        }
+
+        @for (int  cell = 0; cell < 9; cell++){
+            <div class="hwoutercell">
+            @if(cell == 5-1) {
+                <div class="hwcell">Read for 20 min.</div>
+            } else {
+                <div class="hwcell"> @hw[cell]</div>
+            }
+            </div>
+        }
+            
         </div>
-    </section>
-}
-<h3>We suggest the following:</h3>
-<ol class="round">
-    <li class="one">
-        <h5>Getting Started</h5>
-        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-        enables a clean separation of concerns and that gives you full control over markup
-        for enjoyable, agile development. ASP.NET MVC includes many features that enable
-        fast, TDD-friendly development for creating sophisticated applications that use
-        the latest web standards.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
-    </li>
 
-    <li class="two">
-        <h5>Add NuGet packages and jump-start your coding</h5>
-        NuGet makes it easy to install and update free libraries and tools.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
-    </li>
-
-    <li class="three">
-        <h5>Find Web Hosting</h5>
-        You can easily find a web hosting company that offers the right mix of features
-        and price for your applications.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
-    </li>
-</ol>
+        
+    </div>
+</body>
+</html>
